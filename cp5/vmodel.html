@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <input type="text" :value="inputText" @input="action"/>
+        <p>{{inputText}}</p>
+        <button @click="this.inputText=''">清空</button>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                inputText:''
+            }
+        },
+        methods:{
+            action(event){
+                this.inputText = event.target.value;
+            }
+        }
+    })
+    app.mount('#application');
+</script>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <my-comp1 title="组件1"></my-comp1>
+        <my-comp2 title="组件2"></my-comp2>
+        <my-comp3 title="组件3"></my-comp3>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({});
+    app.mixin({
+        created(){
+            console.log('created！');
+        }
+    })
+    const pub_props = {
+        props:['title'],
+        data(){
+            return {
+                a:'a',
+                b:'b',
+                c:'c'
+            }
+        }
+    }
+    const comp1 = {
+        mixins:[pub_props],
+        template:`
+            <div style="border:red solid 2px;">
+                {{title}}
+            </div>
+        `,
+        data() {
+            return {
+                c:'C',
+                d:'d'
+            }
+        },
+        mounted(){
+            console.log(this.$data);
+        }
+    }
+    const comp2 = {
+        mixins:[pub_props],
+        template:`
+            <div style="border:blue solid 2px;">
+                {{title}}
+            </div>
+        `,
+        data() {
+            return {
+                c:'C',
+                d:'d'
+            }
+        }
+    };
+    const comp3 = {
+        mixins:[pub_props],
+        template:`
+            <div style="border:green solid 2px;">
+                {{title}}
+            </div>
+        `,
+        data() {
+            return {
+                c:'C',
+                d:'d'
+            }
+        }
+    };
+    app.component('my-comp1',comp1);
+    app.component('my-comp2',comp2);
+    app.component('my-comp3',comp3);
+    app.mount('#application');
+</script>
+</html>

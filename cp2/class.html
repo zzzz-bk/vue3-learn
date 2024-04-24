@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .blue {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="application">
+        <div :style="{color:textColor,fontSize:textFont}">
+            示例文案
+        </div>
+    </div>
+</body>
+<script>
+    const app = {
+        data() {
+            return {
+                textColor: 'green',
+                textFont: '50px'
+            }
+        },
+    }
+    let vapp = Vue.createApp(app).mount('#application');
+</script>
+
+</html>

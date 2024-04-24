@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <my-container>
+            <p>非默认内容</p>
+        </my-container>
+        <br/>
+        <named-container>
+            <template #header>
+                <h1>头部</h1>
+            </template>
+            <template #main>
+                <p>内容1</p>
+                <p>内容2</p>
+                <p>内容3</p>
+            </template>
+            <template #footer>
+                <p>底部元素</p>
+            </template>
+        </named-container>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({});
+    const containerComponent = {
+        template:`<div style="border-style:solid;border-color:red;border-width:10px;">
+            <slot>插槽默认内容</slot>
+            </div>`
+    }
+    const namedContainerComponent = {
+        template:`<div>
+            <slot name="header"></slot>
+            <hr />
+            <slot name="main"></slot>
+            <hr />
+            <slot name="footer"></slot>
+            </div>`
+    }
+    app.component('my-container',containerComponent);
+    app.component('named-container',namedContainerComponent);
+    app.mount('#application');
+</script>
+</html>

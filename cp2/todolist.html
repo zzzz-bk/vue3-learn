@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <form @submit.prevent="addTask">
+            <span>新建任务</span>
+            <input v-model="taskText" placeholder="请输入任务"/>
+            <button type="submit">添加</button>
+        </form>
+        <ol>
+            <li v-for="(item,index) in todos">
+                {{item}}
+                <button @click="remove(index)">删除</button>
+            </li>
+        </ol>
+    </div>
+</body>
+<script>
+    const app = {
+        data(){
+            return {
+                todos:[],
+                taskText: "default task",
+                test:"test"
+            }
+        },
+        methods:{
+            addTask(){
+                if(this.taskText===''){
+                    alert("请输入任务");
+                    return;
+                }
+                this.todos.push(this.taskText);
+                this.taskText="";
+            },
+            remove(index){
+                this.todos.splice(index,1);
+            },
+            showTest(){
+                alert(this.taskText);
+            }
+        }
+    }
+    let vapp = Vue.createApp(app).mount('#application');
+    vapp.showTest();
+</script>
+</html>

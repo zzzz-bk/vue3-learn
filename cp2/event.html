@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <div>点击次数:{{count}}</div>
+        <button @click="add(2),log($event)">点击这里</button>
+        <br/>
+        <div @click.capture="click1" :style="outer">
+            外层
+            <div @click.stop="click2" :style="middle">
+                中层
+                <div @click="click3" :style="inner">
+                    点击
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    const app = {
+        data() {
+            return {
+                count:0,
+                outer:{
+                    border: 'solid red'
+                },
+                middle:{
+                    border:'solid red'
+                },
+                inner:{
+                    border:'solid red'
+                }
+            }
+        },
+        methods:{
+            add(step){
+                this.count += step;
+            },
+            log(event){
+                console.log(event);
+            },
+            click1(){
+                console.log("外层");
+            },
+            click2(){
+                console.log('中层');
+            },
+            click3(){
+                console.log('内层');
+            }
+        }
+    }
+    let vapp = Vue.createApp(app).mount('#application');
+</script>
+</html>

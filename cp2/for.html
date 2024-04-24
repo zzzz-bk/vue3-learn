@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+
+<body>
+    <div id="application">
+        <template v-for="(item,index) in handle(contarts)">
+            <div>{{index +"."+item.name}}</div>
+            <div>{{item.phone}}</div>
+        </template>
+        <button v-on:click="click">按钮</button>
+        <ol>
+            <li v-for="(value,key,index) in person">
+                {{key}}:{{value}}
+            </li>
+        </ol>
+    </div>
+</body>
+<script>
+    const app = {
+        data() {
+            return {
+                list: [1, 2, 3, 4, 5, 6],
+                contarts: [
+                    {
+                        name: 'yjsnpi',
+                        phone: '1145141919810'
+                    },
+                    {
+                        name: 'tkon',
+                        phone: '889464'
+                    }, {
+                        name: 'pussy',
+                        phone: '292983981'
+                    },
+                ],
+                person: {
+                    name: 'yjsnpi',
+                    age: 24,
+                    num: '1145141919810',
+                    email: '114514@coat.com'
+                }
+            }
+        },
+        methods: {
+            click() {
+                this.contarts.reverse();
+            },
+            handle(l){
+                return l.filter(itm=>itm.name!='pussy');
+            }
+        }
+    }
+
+    Vue.createApp(app).mount('#application')
+</script>
+
+</html>

@@ -1,0 +1,69 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Vue3 Demo</title>
+     <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+ </head>
+ <body>
+    <div id="application"></div>
+ </body>
+ <script>
+    const app = Vue.createApp({
+        setup(){
+            let a = Vue.ref(1);
+            let b = Vue.ref(2);
+            let c = Vue.reactive({
+                data:0
+            });
+            let sum = Vue.computed({
+                set(value){
+                    a.value = value;
+                    b.value = value;
+                },
+                get(){
+                    return a.value+b.value;
+                }
+            });
+            function click(){
+                a.value +=1;
+                b.value +=2;
+                if(sum.value>10){
+                    sum.value = 0;
+                }
+                c.data += 10;
+            }
+            Vue.watchEffect(()=>{
+                console.log('a new value:'+a.value);
+                console.log('b new value:'+b.value);
+            });
+            // Vue.watch(a,(value,old)=>{
+            //     console.log('a old value:'+old+', new value:'+value);
+            // });
+            // Vue.watch(b,(value,old)=>{
+            //     console.log('b old value:'+old+", new value:"+value);
+            // });
+            Vue.watch([a,b],([va,vb],[oa,ob])=>{
+                console.log('a old value:'+oa+", new value:"+va);
+                console.log('b old value:'+ob+", new value:"+vb);
+            })
+            Vue.watch(()=>{
+                return c.data;
+            },(value,old)=>{
+                console.log('c old value:'+old+", new value:"+value);
+            });
+
+            return {
+                sum,
+                click
+            }
+        },
+        template:`
+            <h1>测试数据: {{sum}}</h1>
+            <button @click="click">点击</button>
+        `
+    });
+    app.mount('#application');
+ </script>
+ </html>

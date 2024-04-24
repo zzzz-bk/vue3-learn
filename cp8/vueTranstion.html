@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+    <style>
+        @keyframes keyframe-in {
+            from {
+                width: 0px;
+                height: 0px;
+                background-color: red;
+            }
+            to {
+                width: 100px;
+                height: 100px;
+                background-color: blue;
+            }
+        }
+        @keyframes keyframe-out {
+            from {
+                width: 100px;
+                height: 100px;
+                background-color: blue;
+            }
+            to {
+                width: 0px;
+                height: 0px;
+                background-color: red;
+            }
+        }
+        .ani-enter-from {
+            width: 0px;
+            height: 0px;
+            background-color: red;
+        }
+        .ani-enter-active{
+            /* animation: keyframe-in 3s; */
+            transition: width 3s, height 3s, background-color 3s;
+        }
+        .ani-enter-to{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        .ani-leave-from{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        .ani-leave-active{
+            /* animation: keyframe-out 3s; */
+            transition: width 3s, height 3s, background-color 3s;
+        }
+        .ani-leave-to{
+            width: 0px;
+            height: 0px;
+            background-color: red;
+        }
+        .demo {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        .demo2{
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="application">
+        <button @click="click">显示/隐藏</button>
+        <transition name="ani"
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter"
+        @enter-cancelled="enterCancelled"
+        @before-leave="beforeLeave"
+        @leave="leave"
+        @after-leave="afterLeave"
+        @leave-cancelled="leaveCancelled">
+            <div v-if="show" class="demo"></div>
+            <div v-else class="demo2"></div>
+        </transition>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+        data() {
+            return {
+                show:false
+            }
+        },
+        methods:{
+            click(){
+                this.show = !this.show;
+            },
+            beforeEnter(el) {
+                console.log('before enter')
+            },
+            enter(el,done){
+                console.log('enter')
+            },
+            afterEnter(el){
+                console.log('after enter')
+            },
+            enterCancelled(el){
+                console.log('enter cancelled')
+            },
+            beforeLeave(el){
+                console.log('before leave')
+            },
+            leave(le,done){
+                console.log('leave')
+            },
+            afterLeave(el){
+                console.log('after leave')
+            },
+            leaveCancelled(el){
+                console.log('leave cancelled')
+            }
+        }
+    });
+    app.mount('#application');
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <my-list :count="5"></my-list>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({});
+    const listcom = {
+        props:{
+            count:Number
+        },
+        provide(){
+            return {
+                listCount:this.count
+            };
+        },
+        template:`
+            <div style="border:red solid 10px;">
+                <my-item v-for="item in this.count" :list-count="this.count" :index="item"></my-item>
+            </div>
+        `
+    }
+    const itemcom = {
+        props:{
+            index:Number
+        },
+        template:`
+            <div style="border:blue solid 10px;">
+                <my-label :list-count="this.listCount" :index="this.index"></my-label>
+            </div>
+        `
+    }
+    const labelcom = {
+        props:{
+            index:Number
+        },
+        template:`<div>{{index}}/{{this.listCount}}</div>`,
+        inject:['listCount']
+    }
+    app.component('my-list',listcom);
+    app.component('my-item',itemcom);
+    app.component('my-label',labelcom);
+    app.mount('#application');
+</script>
+</html>

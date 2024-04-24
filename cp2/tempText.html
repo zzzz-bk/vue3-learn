@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+    <style>
+        #h1 {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="application" style="text-align: center;">
+        <h1 v-bind:id="id1">模板内容：{{count}}次点击</h1>
+        <button v-on:click="clickButton">按钮</button>
+    </div>
+</body>
+<script>
+    const app = {
+        data(){
+            return {
+                count:0,
+                countHtml:'<span style="color:red;">0</span>',
+                id1:'h1'
+            }
+        },
+        methods:{
+            clickButton(){
+                this.count=this.count+1;
+            }
+        }
+    }
+    Vue.createApp(app).mount('#application');
+</script>
+</html>

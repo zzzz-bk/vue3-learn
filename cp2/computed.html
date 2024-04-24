@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <p>{{type}}</p>
+        <button @click="add">变大</button>
+    </div>
+</body>
+<script>
+    const app = {
+        data() {
+            return {
+                count:0
+            }
+        },
+        computed:{
+            type:{
+                get(){
+                    return this.count>10?"大":"小";
+                },
+                set(value){
+                    if(value==='大'){
+                        this.count=11;
+                    }else{
+                        this.count=0;
+                    }
+                }
+            }
+        },
+        methods:{
+            add(){
+                this.count = this.count+1;
+            },
+            funcType(){
+                return this.count>10?"大大大大":"小小小小";
+            }
+        }
+    }
+    let vapp = Vue.createApp(app).mount('#application');
+    console.log(vapp.count);
+    console.log(vapp.type);
+    vapp.type='大';
+    console.log(vapp.count);
+</script>
+</html>

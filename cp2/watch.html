@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <input v-model="searchText" placeholder="请输入"/>
+    </div>
+</body>
+<script>
+    const app = {
+        data() {
+            return {
+                searchText:""
+            }
+        },
+        watch:{
+            searchText(ov,nv){
+                if(nv.length>10){
+                    alert("文本长度大于10");
+                }
+            }
+        }
+    }
+    let vapp = Vue.createApp(app).mount('#application');
+</script>
+</html>

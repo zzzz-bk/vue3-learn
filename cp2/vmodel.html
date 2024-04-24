@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+    <style>
+        #h1 {
+            color: red;
+        }
+        .h1 {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="application">
+        <h1 :[prop]="name" v-if="show">标题</h1>
+    </div>
+</body>
+<script>
+    const app = {
+        data(){
+            return {
+                show: true,
+                prop: "id",
+                name: "h1"
+            }
+        }
+    }
+    Vue.createApp(app).mount('#application');
+</script>
+</html>

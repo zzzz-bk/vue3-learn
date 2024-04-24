@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <div style="position: absolute; width: 50px;">
+            <my-alert></my-alert>
+        </div>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({});
+    app.component('my-alert',{
+        template:`
+            <div>
+                <button @click="show = true">弹出弹窗</button>
+            <div>
+            <teleport to="body">
+                <div v-if="show" style="text-align: center; padding: 20px; position:absolute; top: 45%; left: 30%; width: 40%; border:black solid 2px;background-color:white">
+                    <h3>弹窗</h3>
+                    <button @click="show = false">隐藏弹窗</button>
+                </div>
+            </teleport>
+        `,
+        data() {
+            return {
+                show:false
+            }
+        }
+    });
+    app.mount('#application');
+</script>
+</html>

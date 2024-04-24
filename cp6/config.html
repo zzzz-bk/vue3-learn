@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application"></div>
+</body>
+<script>
+    const app = Vue.createApp({});
+    app.config.errorHandler = (error, vm , info) =>{
+        console.error(info);
+    }
+    app.config.warnHandler = (msg, vm, trace)=>{
+        console.warn(msg);
+    }
+    app.config.globalProperties= {
+        version:'1.0.1'
+    }
+    const sub = {
+        mounted(){
+            console.log(this.version);
+        },
+        template:`<div></div>`
+    }
+    app.component('sub-com',sub);
+    app.mount('#application');
+</script>
+</html>

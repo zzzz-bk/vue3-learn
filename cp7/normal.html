@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+    <style>
+        .container{
+            margin: 50px;
+        }
+        .content{
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="application">
+        <div class="container">
+            <div class="content">
+                <input type="radio" name="sex" :value="-1" v-model="sexFilter"/>全部
+                <input type="radio" name="sex" :value="0" v-model="sexFilter"/>男
+                <input type="radio" name="sex" :value="1" v-model="sexFilter"/>女
+            </div>
+
+            <div class="content">
+                查询:<input type="text" v-model="searchKey"/> 
+            </div>
+
+            <div class="content">
+                <table border="1" width="300px">
+                    <tr>
+                        <th>姓名</th>
+                        <th>性别</th>
+                    </tr>
+                    <tr v-for="(data,index) in showDatas">
+                        <td>{{data.name}}</td>
+                        <td>{{data.sex === 0?"男":"女"}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let mock = [
+        {
+            name:"乐嘉",
+            sex:1
+        },{
+            name:"猛男",
+            sex:0
+        },{
+            name:"三柱神",
+            sex:0
+        },{
+            name:'地精头子',
+            sex:0
+        },{
+            name:"三萝莉",
+            sex:1
+        },{
+            name:"书",
+            sex:1
+        }
+    ]
+    const app = Vue.createApp({
+        data() {
+            return {
+                sexFilter:-1,
+                showDatas:[],
+                searchKey:''
+            }
+        },
+        methods:{
+            queryAllData(){
+                this.showDatas = mock;
+            },
+            filterData(){
+                this.searchKey = "";
+                if(this.sexFilter == -1){
+                    this.showDatas = mock;
+                }else{
+                    this.showDatas = mock.filter((data)=>{
+                        return data.sex == this.sexFilter;
+                    })
+                }
+            },
+            searchData(){
+                this.sexFilter = -1
+                if(this.searchKey.length == 0){
+                    this.showDatas = mock;
+                }else{
+                    this.showDatas = mock.filter((data)=>{
+                        return data.name.search(this.searchKey)!=-1;
+                    })
+                }
+            }
+        },
+        mounted(){
+            setTimeout(this.queryAllData,3000);
+        },
+        watch:{
+            sexFilter(old,nv){
+                this.filterData();
+            },
+            searchKey(old,nv){
+                this.searchData();
+            }
+        }
+    });
+    app.mount('#application');
+</script>
+</html>

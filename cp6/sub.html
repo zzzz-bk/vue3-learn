@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <sub-com v-if="show">
+            {{text}}
+        </sub-com>
+        <button @click="click">切换显示</button>
+    </div>
+</body>
+<script>
+    const sub = {
+        beforeCreate(){
+            console.log('before create');
+        },
+        created(){
+            console.log('created');
+        },
+        beforeMount(){
+            console.log('before mount');
+        },
+        mounted(){
+            console.log('mounted');
+        },
+        beforeUpdate(){
+            console.log('before update');
+        },
+        updated(){
+            console.log('update');
+        },
+        activated(){
+            console.log('activated');
+        },
+        deactived(){
+            console.log('deactivated');
+        },
+        beforeUnmount(){
+            console.log('before unmount');
+        },
+        unmounted(){
+            console.log('unmounted');
+        },
+        errorCaptured(error,instance,info){
+            console.error("error:"+info);
+        },
+        renderTracked(event){
+            console.log("虚拟dom重新渲染："+event.type);
+        },
+        renderTriggered(event){
+            console.log("虚拟dom触发渲染:"+event.type);
+        },
+        template:`
+            <div>
+                <slot></slot>
+            </div>
+        `
+    }
+    const app = Vue.createApp({
+        data() {
+            return {
+                show:false,
+                text:'显示内容'
+            }
+        },
+        methods:{
+            click(){
+                this.show = !this.show;
+            }
+        }
+    });
+    app.component('sub-com',sub);
+    app.mount('#application');
+</script>
+</html>

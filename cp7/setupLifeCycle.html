@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <comp name="组件名称"></comp>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({});
+    app.component("comp",{
+        setup(props,context) {
+            let data = "setup数据"
+            Vue.onMounted(()=>{
+                console.log('setup on mounted');
+            });
+            return ()=>Vue.h('div',[data]);
+        },
+        props:{
+            name:String
+        },
+        mounted(){
+            console.log("component on mounted");
+        }
+    });
+    app.mount('#application');
+</script>
+</html>

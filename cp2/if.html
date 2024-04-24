@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <h1 v-if="show">标题</h1>
+        <p v-else>如果不显示标题就显示段落</p>
+        <h1 v-show="show">v-show标题</h1>
+    </div>
+    
+</body>
+<script>
+    const app = {
+        data(){
+            return {
+                show: false
+            }
+        }
+    }
+    Vue.createApp(app).mount('#application')
+</script>
+</html>

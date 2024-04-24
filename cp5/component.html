@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue3 Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.4.21/dist/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="application">
+        <my-alert @myclick="appfunc" title="按钮1"></my-alert>
+        <my-alert @myclick="appfunc" title="按钮123"/>
+    </div>
+</body>
+<script>
+    const app = Vue.createApp({
+        methods:{
+            appfunc(param){
+                console.log('点击了自定义组件:'+param);
+            }
+        }
+    });
+    const alertComponent = {
+        data() {
+            return {
+                msg: '警告框提示',
+                count:0
+            }
+        },
+        methods:{
+            click(){
+                // alert(this.msg+ this.count++);
+                console.log('组件内部逻辑');
+                this.$emit('myclick',this.title);
+            }
+        },
+        props:['title'],
+        template:`<div><button @click="click">{{title}}</button></div>`
+    }
+    app.component('my-alert',alertComponent);
+    app.mount('#application');
+</script>
+</html>
