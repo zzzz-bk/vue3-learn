@@ -17,9 +17,12 @@ const fileManager = {
         let url = this.path + topicName + '/' + postName + '.md';
         return new Promise((res,rej)=>{
             axios.get(url).then(response=>{
-                console.log(response.data)
+                // console.log(response.data)
                 res(response)
-            },rej)
+            },rej).catch(err=>{
+                console.log(err)
+                console.log('url:'+url)
+            })
         })
     }
 }

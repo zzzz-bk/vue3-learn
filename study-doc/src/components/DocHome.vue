@@ -1,10 +1,10 @@
 <template>
     <el-container id="container">
         <el-header style="width: 100%; height: 120px;">
-            <doc-header :items="navItems"></doc-header>
+            <doc-header :items="navItems" @selected="changeSelected"></doc-header>
         </el-header>
         <el-main>
-            <doc-body :items="bodyItems"></doc-body>
+            <doc-body :items="bodyItems" :topic="navItems[currentTopicIndex].title"></doc-body>
         </el-main>
         <el-footer>
             <div id="footer">{{ desc }}</div>
@@ -15,11 +15,35 @@
 <script setup>
 import DocHeader from './DocHeader.vue';
 import DocBody from './DocBody.vue'
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import fileManager from '@/tools/fileManager';
 
-let navItems = ref([{index:0,title:'HTML专题'},{index:1,title:'CSS专题'}])
-let bodyItems = ref([{index:0,title:'HTML简介'},{index:1,title:'HTML编辑器'}])
+onMounted(() => {
+    fileManager.getPostContent('HTML专题','文本标签').then(()=>{
+        // console.log(res)
+    })
+})
+
+let navItems = ref(fileManager.getAllTopic().map((item,index)=>{
+    return {
+        index:index,
+        title:item
+    }
+}))
+let currentTopicIndex = ref(0)
+let bodyItems = computed(()=>{
+    return fileManager.getPosts(currentTopicIndex.value).map((item,index)=>{
+        return {
+            index:index,
+            title:item
+        }
+    })
+})
 let desc = ref('版权所有，仅限学习使用，禁止传播!')
+
+function changeSelected(index){
+    currentTopicIndex.value = index
+}
 </script>
 
 <style scoped>
