@@ -78,6 +78,9 @@ function logout(){
     Store.commit('clearUserInfo');
     router.push({name:'router'})
 }
+function onSelect(index){
+    router.push(index)
+}
 </script>
 
 <style scoped>

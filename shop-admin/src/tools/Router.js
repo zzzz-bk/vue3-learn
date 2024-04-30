@@ -3,6 +3,8 @@ import LoginPage from "@/components/login/LoginPage.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import Store from "./Storage";
 import OrderPage from "@/components/order/OrderPage.vue";
+import GoodList from "@/components/goods/GoodList.vue";
+import AddGood from "@/components/goods/AddGood.vue";
 
 const Router = createRouter({
     history: createWebHashHistory(),
@@ -21,6 +23,16 @@ const Router = createRouter({
                     path: 'order/:type',
                     component: OrderPage,
                     name: 'order'
+                },
+                {
+                    path:'goods/:type',
+                    component:GoodList,
+                    name:'Goods'
+                },
+                {
+                    path:'addGood/:type',
+                    component:AddGood,
+                    name:'AddGood'
                 }
             ],
             redirect: '/home/order/0'

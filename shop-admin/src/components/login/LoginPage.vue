@@ -39,7 +39,7 @@ function login() {
     })
     setTimeout(() => {
         router.push({name:'home'})
-    }, 3000);
+    }, 1500);
 }
 </script>
 
