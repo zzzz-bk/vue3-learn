@@ -4,10 +4,10 @@
             <h1>电商后台管理系统</h1>
         </div>
         <div class="input">
-            <el-input v-model="name" prefix-icon="el-icon-user" placeholder="请输入用户名"></el-input>
+            <el-input v-model="name" prefix-icon="User" placeholder="请输入用户名"></el-input>
         </div>
         <div class="input">
-            <el-input type="password" v-model="password" prefix-icon="el-icon-lock" placeholder="请输入密码" show-password></el-input>
+            <el-input type="password" v-model="password" prefix-icon="Lock" placeholder="请输入密码" show-password></el-input>
         </div>
         <div class="input">
             <el-button @click="login" style="width:500px" type="primary" :disabled="disabled">登录</el-button>

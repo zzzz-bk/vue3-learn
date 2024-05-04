@@ -14,7 +14,7 @@
             @select="onSelect">
                 <el-sub-menu index="1">
                     <template #title>
-                        <i class="el-icon-s-order"></i>
+                        <el-icon><List /></el-icon>
                         <span>订单管理</span>
                     </template>
                     <el-menu-item index="/home/order/0">普通订单</el-menu-item>
@@ -22,7 +22,7 @@
                 </el-sub-menu>
                 <el-sub-menu index="2">
                     <template #title>
-                        <i class="el-icon-s-shop"></i>
+                        <el-icon><Shop /></el-icon>
                         <span>商品管理</span>
                     </template>
                     <el-menu-item index="/home/goods/0">普通商品</el-menu-item>
@@ -32,7 +32,7 @@
                 </el-sub-menu>
                 <el-sub-menu index="3">
                     <template #title>
-                        <i class="el-icon-s-custom"></i>
+                        <el-icon><User /></el-icon>
                         <span>店长管理</span>
                     </template>
                     <el-menu-item index="/home/ownerlist">店长列表</el-menu-item>
@@ -41,15 +41,15 @@
                 </el-sub-menu>
                 <el-sub-menu index="4">
                     <template #title>
-                        <i class="el-icon-s-ticket"></i>
+                        <el-icon><Money /></el-icon>
                         <span>财务管理</span>
                     </template>
                     <el-menu-item index="/home/trxinfo">交易明细</el-menu-item>
-                    <el-menu-item index="/home/transmatch">对账明细</el-menu-item>
+                    <el-menu-item index="/home/transmatchReport">对账明细</el-menu-item>
                 </el-sub-menu>
                 <el-sub-menu index="5">
                     <template #title>
-                        <i class="el-icon-s-tools"></i>
+                        <el-icon><DataLine /></el-icon>
                         <span>数据统计</span>
                     </template>
                     <el-menu-item index="/home/data">数据统计</el-menu-item>
