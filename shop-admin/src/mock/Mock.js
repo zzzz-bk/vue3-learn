@@ -107,6 +107,23 @@ const Mock = {
             }))
         }
         return array;
+    },
+    getChartsData(){
+        let array = []
+        for(let i=0;i<mockjs.Random.integer(6,20);i++){
+            array.push(mockjs.Random.integer(0,100))
+        }
+        return array;
+    },
+    getTradeData(){
+        return mockjs.mock({
+            'allTra':mockjs.Random.integer(10000,50000),
+            'speTra':mockjs.Random.integer(0,5000),
+            'norTra':mockjs.Random.integer(0,5000),
+            'userCount':mockjs.Random.integer(0,10000),
+            'managerCount':mockjs.Random.integer(0,100),
+            'time':mockjs.Random.datetime('yyyy-MM-dd A HH:mm:ss')
+        })
     }
 }
 
